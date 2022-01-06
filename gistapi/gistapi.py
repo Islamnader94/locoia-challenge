@@ -69,6 +69,8 @@ def search():
     """
     post_data = request.get_json()
     # BONUS: Validate the arguments?
+    # - I changed it to get arguments for better handeling keys in dict in case of no key provided.
+    # - Validation can be done when we add marshmallow library to serialize results.
 
     username = post_data.get('username')
     pattern = post_data.get('pattern')
@@ -87,8 +89,9 @@ def search():
                 gist_content = session.get(file['raw_url']).text
                 if re.search(pattern, gist_content):
                     matches.append('https://gist.github.com/{username}/{gist_id}'.format(
-                        username=username, gist_id=gist['id'])
-                    )
+                        username=username,
+                        gist_id=gist['id']
+                    ))
 
         return jsonify({
             'username': username,
