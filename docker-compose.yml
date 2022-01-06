@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  web: 
+    build: .
+    volumes:
+      - .:/app
+    command: "python -m gistapi.gistapi"
+    ports: 
+      - "8000:8000"
+    restart: always
+    stdin_open: true
+    tty: true
